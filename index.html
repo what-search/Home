@@ -2,6 +2,43 @@
 <html lang="zh-CN">
 
 <head>
+    
+    <script language=javascript>
+        function siteTime(){
+            window.setTimeout("siteTime()", 1000);
+            var seconds = 1000;
+            var minutes = seconds * 60;
+            var hours = minutes * 60;
+            var days = hours * 24;
+            var years = days * 365;
+            var today = new Date();
+            var todayYear = today.getFullYear();
+            var todayMonth = today.getMonth()+1;
+            var todayDate = today.getDate();
+            var todayHour = today.getHours();
+            var todayMinute = today.getMinutes();
+            var todaySecond = today.getSeconds();
+            /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+            year - 作为date对象的年份，为4位年份值
+            month - 0-11之间的整数，做为date对象的月份
+            day - 1-31之间的整数，做为date对象的天数
+            hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+            minutes - 0-59之间的整数，做为date对象的分钟数
+            seconds - 0-59之间的整数，做为date对象的秒数
+            microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+            var t1 = Date.UTC(2022,01,01,00,00,00); //北京时间2017-09-16 00:00:00创建网站的时间
+            var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+            var diff = t2-t1;
+            var diffYears = Math.floor(diff/years);
+            var diffDays = Math.floor((diff/days)-diffYears*365);
+            var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+            var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+            var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+            document.getElementById("sitetime").innerHTML=+diffYears+"年"+diffDays+"天"+diffHours+"时"+diffMinutes+"分钟"+diffSeconds+"秒";
+        }
+        siteTime();
+    </script>
+
     <!-- 基础信息 -->
     <meta charset="utf-8">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -41,6 +78,9 @@
         if ( /*@cc_on!@*/ false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href =
             "/upgrade-your-browser/index.html?referrer=" + encodeURIComponent(window.location.href);
     </script>
+    
+    
+    
     <script>
 var _hmt = _hmt || [];
 (function() {
@@ -177,12 +217,8 @@ var _hmt = _hmt || [];
                                     <!--时间-->
                                     <div class="time cards">
                                         <div class="timeshow" id="time">
-                                            2000&nbsp;年&nbsp;0&nbsp;月&nbsp;00&nbsp;日&nbsp;<span
-                                                class="weekday">星期一</span><br><span class="time-text">00:00:00</span>
                                         </div>
-                                         <div class="weather">
-                        <span id="wea_text">N/A</span>&nbsp;<span id="tem2">N/A</span>°C&nbsp;~&nbsp;<span
-                            id="tem1">N/A</span>°C
+                                        <h6>本站运行:<span id="sitetime"  style="color: #fefefe;" ></span></h6> 
                     </div>
                                     </div>
                                 </div>
@@ -216,7 +252,7 @@ var _hmt = _hmt || [];
                                         <a href="./涩图.html" target="_blank">
                                             <div class="link-card cards">
                                                 <i class="iconfont "></i>
-                                                <span class="link-name">涩    图</span>
+                                                <span class="link-name">图    片</span>
                                             </div>
                                         </a>
                                     </div>
